@@ -4,27 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 type SubMenuItem = {
   title: string;
-  path: string; 
+  path?: string;
 };
 
 type MenuItem = {
   title: string;
   icon: React.ReactNode;
-  path?: string; 
-  subMenu?: (string | SubMenuItem)[]; 
+  path?: string;
+  subMenu?: (string | SubMenuItem)[];
 };
 
 const Sidebar: React.FC = () => {
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    setSidebarOpen(false);
-  };
-
-  
   const menus: MenuItem[] = [
     { title: "Aperçu", icon: <Home size={20} />, path: "/dashboard" },
     { title: "Créateurs", icon: <Users size={20} />, path: "/createurs" },
@@ -33,44 +27,48 @@ const Sidebar: React.FC = () => {
       icon: <Users size={20} />,
       subMenu: [
         { title: "Liste employés", path: "/employes/liste" },
-        { title: "Ajouter employé", path: "/employes/ajouter" }, 
-        { title: "Statistiques", path: "/employes/stats" }, 
-      ] as SubMenuItem[], 
+        { title: "Ajouter employé", path: "/employes/ajouter" },
+        { title: "Statistiques", path: "/analyse" },
+      ],
     },
     {
       title: "MonOffmy",
       icon: <Mail size={20} />,
       subMenu: [
-        { title: "Messages", path: "/MessagePage" }, // OK
-        { title: "Messages envoyés", path: "/#" }, 
-        { title: "Paramètres mail", path: "/#" }, 
-      ] as SubMenuItem[],
+        { title: "Messages", path: "/MessagePage" },
+        "Messages envoyés",
+        "Paramètres mail",
+      ],
     },
     {
       title: "Paramètre",
       icon: <Settings size={20} />,
       subMenu: [
-        { title: "Profil", path: "/parametres/profil" }, 
-        { title: "Sécurité", path: "/parametres/securite" }, 
-        { title: "Préférences", path: "/parametres/preferences" }, // Converti en objet
-      ] as SubMenuItem[],
+        { title: "Profil", path: "/profile" },
+        { title: "Sécurité", path: "/parametres/securite" },
+        "Préférences",
+      ],
     },
   ];
 
-  const handleMenuClick = (menu: MenuItem) => {
+  const toggleSubMenu = (menu: MenuItem, subItem?: string | SubMenuItem) => {
+    if (subItem && typeof subItem === "object" && subItem.path) {
+      navigate(subItem.path);
+      setSidebarOpen(false);
+      return;
+    }
     if (menu.path) {
-      // Si le menu principal a un path, naviguer
-      handleNavigation(menu.path);
+      navigate(menu.path);
+      setSidebarOpen(false);
     } else if (menu.subMenu) {
-      // S'il n'a pas de path mais a un sous-menu, basculer le sous-menu
       setOpenSubMenu(openSubMenu === menu.title ? null : menu.title);
     }
   };
 
   return (
-    <>
-      {/* Bouton hamburger pour mobile */}
-      <div className="lg:hidden p-4 bg-gray-900 text-gray-200 flex justify-between items-center">
+    <div className="flex lg:w-50">
+      {/* Header mobile */}
+      <div className="lg:hidden p-4 bg-gray-900 text-gray-200 flex justify-between items-center w-full fixed top-0 left-0 z-40">
         <h1 className="text-2xl font-bold">SIMPLY</h1>
         <button onClick={() => setSidebarOpen(!sidebarOpen)}>
           <Menu size={24} />
@@ -92,8 +90,7 @@ const Sidebar: React.FC = () => {
             <li key={idx}>
               <div
                 className="flex items-center justify-between gap-3 p-2 rounded-md hover:bg-gray-800 cursor-pointer"
-                // On utilise la nouvelle fonction de gestion du clic
-                onClick={() => handleMenuClick(menu)} 
+                onClick={() => toggleSubMenu(menu)}
               >
                 <div className="flex items-center gap-3">
                   {menu.icon}
@@ -102,23 +99,22 @@ const Sidebar: React.FC = () => {
                 {menu.subMenu && (
                   <ChevronDown
                     size={16}
-                    className={`transition-transform ${openSubMenu === menu.title ? "rotate-180" : ""}`}
+                    className={`transition-transform ${
+                      openSubMenu === menu.title ? "rotate-180" : ""
+                    }`}
                   />
                 )}
               </div>
 
-              {/* Sous-menu */}
               {menu.subMenu && openSubMenu === menu.title && (
                 <ul className="pl-10 mt-1 space-y-1">
-                  {/* Itérer sur le sous-menu (qui contient maintenant des objets) */}
-                  {(menu.subMenu as SubMenuItem[]).map((subItem, subIdx) => (
+                  {menu.subMenu.map((subItem, subIdx) => (
                     <li
                       key={subIdx}
                       className="text-gray-300 text-sm p-2 rounded-md hover:bg-gray-700 cursor-pointer"
-                      // Ajout du onClick pour la navigation du sous-élément
-                      onClick={() => handleNavigation(subItem.path)}
+                      onClick={() => toggleSubMenu(menu, subItem)}
                     >
-                      {subItem.title}
+                      {typeof subItem === "string" ? subItem : subItem.title}
                     </li>
                   ))}
                 </ul>
@@ -128,14 +124,19 @@ const Sidebar: React.FC = () => {
         </ul>
       </div>
 
-      {/* Overlay pour mobile */}
+      {/* Overlay mobile */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         ></div>
       )}
-    </>
+
+      {/* Contenu principal */}
+      <div className="flex-1 lg:ml-60 mt-14 lg:mt-0 p-4">
+        {/* Ici tu mets ton contenu ou <Outlet /> */}
+      </div>
+    </div>
   );
 };
 
