@@ -1,9 +1,13 @@
 import { AiOutlineBarChart, AiOutlineDollar, AiOutlineUser } from "react-icons/ai";
 import { FiZap } from "react-icons/fi";
+import Chart from "../charts/Charts";
 
 const DashboardContent = () => {
   return (
-    <div className="p-4 sm:p-6 bg-gray-900 text-gray-100 flex-1 overflow-auto">
+    <div className="p-4 sm:p-6 text-gray-100">
+
+
+
       <h2 className="text-lg font-semibold mb-4">Détails de revenus</h2>
 
       {/* Total revenus et détails */}
@@ -109,13 +113,24 @@ const DashboardContent = () => {
         </div>
 
 
-        {/* Graphique */}
-        <div className="col-span-1 lg:col-span-2 bg-gray-800 p-4 rounded-lg shadow">
+        <div className="col-span-1 lg:col-span-2 bg-gray-800 p-4 rounded-lg shadow h-64 lg:h-auto flex flex-col">
           <h3 className="mb-4">Vue d'ensemble</h3>
-          <div className="h-64 bg-gray-700 rounded-lg flex items-center justify-center">
-            Graphique ici
+          <div className="flex-1 bg-gray-700 rounded-lg p-2 min-h-[200px]">
+            <Chart
+              data={[
+                { name: "Jan", revenue: 400 },
+                { name: "Feb", revenue: 300 },
+                { name: "Mar", revenue: 500 },
+                { name: "Apr", revenue: 200 },
+                { name: "May", revenue: 350 },
+                { name: "Jun", revenue: 450 },
+              ]}
+            />
           </div>
         </div>
+
+
+
       </div>
     </div>
   );
