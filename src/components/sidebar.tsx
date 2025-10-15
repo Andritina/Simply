@@ -132,10 +132,6 @@ const Sidebar: React.FC = () => {
         ></div>
       )}
 
-      {/* Contenu principal */}
-      <div className="flex-1 lg:ml-60 mt-14 lg:mt-0 p-4">
-        {/* Ici tu mets ton contenu ou <Outlet /> */}
-      </div>
     </div>
   );
 };
