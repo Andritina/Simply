@@ -174,7 +174,7 @@ const BalanceTableTile = () => (
 export default function FinancePage() {
   return (
     <div className="min-h-screen bg-[#121317] text-white font-sans">
-      <header className="sticky top-0 z-20 bg-[#121317]/90 backdrop-blur-md p-4 flex justify-between items-center shadow-md">
+      <header className="sticky top-0 z-20 bg-[#1D1E22]/90 backdrop-blur-md p-4 flex justify-between items-center shadow-md">
         <h1 className="text-2xl font-bold tracking-wide">AI INSHITS & FINANCE</h1>
         <div className="flex space-x-3">
           <button className="text-sm font-semibold py-2 px-4 rounded-md border border-gray-600 hover:bg-[#2C2D32] hover:shadow-md transition-all duration-300">
