@@ -8,6 +8,8 @@ import ChatPage from './pages/ChatPage'
 import AnalysePage from './pages/AnalysePage'
 import ProfilePage from './pages/ProfilePage'
 import ImageGallery from './components/ImageGallery'
+import FinancePage from './pages/FinancePage'
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +22,7 @@ function App() {
          <Route path="/analyse" element={<AnalysePage />} /> 
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/image" element={<ImageGallery />} />
+        <Route path="/finance" element={<FinancePage />} />
       </Routes>
     </BrowserRouter>
   )
