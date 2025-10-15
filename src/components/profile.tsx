@@ -15,7 +15,7 @@ const profile: React.FC = () => {
       <section className="flex items-center mb-10">
         <div className="w-28 h-28 rounded-full overflow-hidden mr-6 ring-4 ring-blue-500">
             {/* Image réelle ici */}
-            <img src="https://via.placeholder.com/150/0000FF/808080?text=S.K." alt="Profile" className="w-full h-full object-cover"/>
+            <img src="https://i.pravatar.cc/30?img=1." alt="Profile" className="w-full h-full object-cover"/>
         </div>
         <div>
           <h3 className="text-3xl font-bold">Sarah K.</h3>
@@ -25,6 +25,7 @@ const profile: React.FC = () => {
           </button>
         </div>
       </section>
+      <section>
 
       {/* B. Grille Principale (Utilise Tailwind Grid) */}
       {/* La grille est divisée en 3 colonnes pour les grands écrans (lg:grid-cols-3) */}
@@ -46,6 +47,7 @@ const profile: React.FC = () => {
           <AccountPreferencesCard title="Account Preferences" socialLinks={true} />
         </div>
       </div>
+      </section>
     </main>
   );
 };

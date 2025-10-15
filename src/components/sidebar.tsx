@@ -1,6 +1,6 @@
-import { Home, Users, Mail, Settings, ChevronDown, Menu } from "lucide-react";
-import React, { useState } from "react"; 
-import { useNavigate } from "react-router-dom"; 
+import { Home, Users, Mail, Settings, ChevronDown, Menu, X } from "lucide-react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type SubMenuItem = {
   title: string;
@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
 
   const menus: MenuItem[] = [
-    { title: "Aperçu", icon: <Home size={20} />, path: "/dashboard" },
+    { title: "Dashboard", icon: <Home size={20} />, path: "/dashboard" },
     { title: "Créateurs", icon: <Users size={20} />, path: "/createurs" },
     {
       title: "Employés",
@@ -66,76 +66,135 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="flex lg:w-50">
+    <div className="flex">
       {/* Header mobile */}
-      <div className="lg:hidden p-4 bg-gray-900 text-gray-200 flex justify-between items-center w-full fixed top-0 left-0 z-40">
-        <h1 className="text-2xl font-bold">SIMPLY</h1>
-        <button onClick={() => setSidebarOpen(!sidebarOpen)}>
-          <Menu size={24} />
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 backdrop-blur-lg border-b border-slate-700/50 flex items-center justify-between px-6 z-40 shadow-xl">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
+            <span className="text-white font-bold text-sm">S</span>
+          </div>
+          <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            SIMPLY
+          </h1>
+        </div>
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="p-2 rounded-lg hover:bg-slate-700/50 transition-colors"
+        >
+          <Menu size={24} className="text-slate-200" />
         </button>
       </div>
 
       {/* Sidebar */}
       <div
         className={`
-          bg-gray-900 text-gray-200 h-screen p-5 flex flex-col
-          fixed top-0 left-0 z-50
-          w-60 lg:relative lg:translate-x-0 transition-transform duration-300
+          fixed top-0 left-0 h-screen w-72 z-50
+          bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950
+          border-r border-slate-700/50 shadow-2xl
+          lg:relative lg:translate-x-0 transition-all duration-300 ease-in-out
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        <h1 className="text-2xl font-bold mb-10 hidden lg:block">SIMPLY</h1>
-        <ul className="space-y-1">
+        {/* Header */}
+        <div className="p-4 border-b border-slate-700/50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-base">S</span>
+              </div>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 bg-clip-text text-transparent">
+                SIMPLY
+              </h1>
+            </div>
+            <button
+              onClick={() => setSidebarOpen(false)}
+              className="lg:hidden p-1 rounded-lg hover:bg-slate-800 transition-colors"
+            >
+              <X size={18} className="text-slate-400" />
+            </button>
+          </div>
+        </div>
+
+
+        {/* Menu */}
+        <nav className="p-4 space-y-2 overflow-y-auto h-[calc(100vh-88px)]">
           {menus.map((menu, idx) => (
-            <li key={idx}>
+            <div key={idx}>
               <div
-                className="flex items-center justify-between gap-3 p-2 rounded-md hover:bg-gray-800 cursor-pointer"
+                className={`
+                  group flex items-center justify-between gap-3 px-4 py-3 rounded-xl
+                  cursor-pointer transition-all duration-200
+                  hover:bg-gradient-to-r hover:from-slate-800/80 hover:to-slate-800/40
+                  hover:shadow-lg hover:scale-[1.02]
+                  ${openSubMenu === menu.title ? 'bg-gradient-to-r from-slate-800/60 to-slate-800/30' : ''}
+                `}
                 onClick={() => toggleSubMenu(menu)}
               >
                 <div className="flex items-center gap-3">
-                  {menu.icon}
-                  <span>{menu.title}</span>
+                  <div className={`
+                    p-2 rounded-lg transition-all duration-200
+                    ${openSubMenu === menu.title
+                      ? 'bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400'
+                      : 'bg-slate-800/50 text-slate-400 group-hover:bg-slate-700/50 group-hover:text-slate-200'
+                    }
+                  `}>
+                    {menu.icon}
+                  </div>
+                  <span className={`
+                    font-medium transition-colors duration-200
+                    ${openSubMenu === menu.title ? 'text-slate-100' : 'text-slate-300 group-hover:text-slate-100'}
+                  `}>
+                    {menu.title}
+                  </span>
                 </div>
                 {menu.subMenu && (
                   <ChevronDown
-                    size={16}
-                    className={`transition-transform ${
-                      openSubMenu === menu.title ? "rotate-180" : ""
-                    }`}
+                    size={18}
+                    className={`
+                      transition-all duration-300
+                      ${openSubMenu === menu.title
+                        ? 'rotate-180 text-blue-400'
+                        : 'text-slate-500 group-hover:text-slate-300'
+                      }
+                    `}
                   />
                 )}
               </div>
 
               {menu.subMenu && openSubMenu === menu.title && (
-                <ul className="pl-10 mt-1 space-y-1">
+                <div className="mt-2 ml-4 space-y-1 animate-in slide-in-from-top-2 duration-300">
                   {menu.subMenu.map((subItem, subIdx) => (
-                    <li
+                    <div
                       key={subIdx}
-                      className="text-gray-300 text-sm p-2 rounded-md hover:bg-gray-700 cursor-pointer"
+                      className="
+                        group/sub flex items-center gap-3 px-4 py-2.5 rounded-lg
+                        cursor-pointer transition-all duration-200
+                        hover:bg-slate-800/60 hover:translate-x-1
+                        border-l-2 border-slate-700 hover:border-blue-500/50
+                      "
                       onClick={() => toggleSubMenu(menu, subItem)}
                     >
-                      {typeof subItem === "string" ? subItem : subItem.title}
-                    </li>
+                      <div className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover/sub:bg-blue-400 transition-colors" />
+                      <span className="text-sm text-slate-400 group-hover/sub:text-slate-200 transition-colors">
+                        {typeof subItem === "string" ? subItem : subItem.title}
+                      </span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               )}
-            </li>
+            </div>
           ))}
-        </ul>
+        </nav>
+
       </div>
 
       {/* Overlay mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden animate-in fade-in duration-200"
           onClick={() => setSidebarOpen(false)}
-        ></div>
+        />
       )}
-
-      {/* Contenu principal */}
-      <div className="flex-1 lg:ml-60 mt-14 lg:mt-0 p-4">
-        {/* Ici tu mets ton contenu ou <Outlet /> */}
-      </div>
     </div>
   );
 };
