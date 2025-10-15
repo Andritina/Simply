@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Contenu } from '../types';
+import type { Contenu } from '../types/types';
 
 interface CarteContenuProps {
   contenu: Contenu;
