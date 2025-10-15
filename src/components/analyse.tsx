@@ -47,8 +47,8 @@ const initialData: DataItem[] = [
 ];
 
 const Analyse: React.FC = () => {
-  const [data, setData] = useState<DataItem[]>(initialData);
-  const [selectedDateRange, setSelectedDateRange] = useState("1er Sep - 30 Sep 2024");
+  const [data] = useState<DataItem[]>(initialData);
+  const [selectedDateRange] = useState("1er Sep - 30 Sep 2024");
 
   return (
     <div className="bg-[#111827] text-gray-200 p-4 sm:p-6 rounded-xl min-h-screen font-sans">
