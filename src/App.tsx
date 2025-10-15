@@ -18,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} /> 
         <Route path="/createurs" element={<CreateursPage />} />
         <Route path="/MessagePage" element={<MessagePage />} /> 
+        
         <Route path="/chat" element={<ChatPage />} />
          <Route path="/analyse" element={<AnalysePage />} /> 
         <Route path="/profile" element={<ProfilePage />} />
