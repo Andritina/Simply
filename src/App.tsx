@@ -7,7 +7,7 @@ import MessagePage from './pages/MessagePage'
 import ChatPage from './pages/ChatPage'
 import AnalysePage from './pages/AnalysePage'
 import ProfilePage from './pages/ProfilePage'
-
+import ImageGallery from './components/ImageGallery'
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +19,7 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
          <Route path="/analyse" element={<AnalysePage />} /> 
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/image" element={<ImageGallery />} />
       </Routes>
     </BrowserRouter>
   )

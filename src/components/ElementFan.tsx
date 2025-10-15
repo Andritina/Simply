@@ -1,7 +1,7 @@
 // src/components/ElementFan.tsx
 
 import React from 'react';
-import type { Fan } from '../types';
+import type { Fan } from '../types/types';
 
 interface ElementFanProps {
  fan: Fan;

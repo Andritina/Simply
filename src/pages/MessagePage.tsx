@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import { BarreLateraleFans } from '../components/BarreLateraleFans';
 import { CarteContenu } from '../components/CarteContenu';
-import type { Fan, Contenu } from '../types';
+import type { Fan, Contenu } from '../types/types';
 
 const FANS_SIMULES: Fan[] = [
   { 
