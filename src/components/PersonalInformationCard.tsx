@@ -26,7 +26,7 @@ const PersonalInformationCard: React.FC = () => {
         // Conteneur de la carte
         <div className="bg-gray-800 rounded-xl p-6 shadow-lg">
             <h3 className="text-xl font-semibold mb-6">Personnal information</h3>
-            
+           
             {/* Grille pour les champs (2 colonnes sur écrans moyens/grands) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InputField label="Full name" />
