@@ -28,35 +28,36 @@ const CONTENUS_SIMULES: Contenu[] = TITRES_SIMULES.map((titre, index) => {
 
 const MessagePage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-800 font-sans flex flex-col">
-      {/* Navbar fixe en haut */}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <Navbar />
+    <div className="flex h-screen bg-gray-800">
+      {/* Sidebar - toujours visible et taille normale */}
+      <div className="w-64 flex-shrink-0">
+        <Sidebar />
       </div>
+      
+      {/* Contenu principal avec navbar et contenu scrollable */}
+      <div className="flex-1 flex flex-col min-h-0">
+        <Navbar />
 
-      <div className="flex flex-1 pt-[64px]"> {/* décalage du Navbar */}
-        {/* Sidebar fixée à gauche */}
-        <div className="fixed top-[64px] left-0 h-[calc(100vh-64px)] w-60 z-40 bg-gray-900 border-r border-gray-700">
-          <Sidebar />
-        </div>
-
-        {/* Contenu principal (décalé à droite du Sidebar) */}
-        <div className="flex flex-1 ml-60">
-          {/* Barre latérale fans (collée à gauche du contenu) */}
-          
-          <div className="sticky top-[64px] h-[calc(100vh-64px)] z-30">
+        {/* Contenu principal avec sidebar des fans et grille de messages */}
+        <div className="flex-1 overflow-auto bg-gray-900 flex">
+          {/* Barre latérale fans - cachée sur mobile */}
+          <div className="w-80 flex-shrink-0 lg:block md:block hidden">
             <BarreLateraleFans fans={FANS_SIMULES} />
           </div>
 
-          {/* Zone principale scrollable */}
-          <main className="flex-1 p-8 overflow-y-auto">
-            <h1 className="text-3xl font-light text-center text-white mb-6">Mes messages</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 opacity-40">
+          {/* Zone des messages */}
+          <div className="flex-1 p-4 sm:p-6 overflow-auto">
+            <div className="mb-6">
+              <h1 className="text-2xl sm:text-3xl font-light text-center text-white">Mes messages</h1>
+            </div>
+
+            {/* Grille des messages */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {CONTENUS_SIMULES.map((contenu) => (
                 <CarteContenu key={contenu.id} contenu={contenu} />
               ))}
-            </div>  
-          </main>
+            </div>
+          </div>
         </div>
       </div>
     </div>

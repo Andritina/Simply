@@ -26,8 +26,8 @@ const Sidebar: React.FC = () => {
       title: "Employés",
       icon: <Users size={20} />,
       subMenu: [
-        { title: "Liste employés", path: "/employes/liste" },
-        { title: "Ajouter employé", path: "/employes/ajouter" },
+        { title: "Liste employés", path: "/employe" },
+        //{ title: "Ajouter employé", path: "/employes/ajouter" },
         { title: "Statistiques", path: "/analyse" },
       ],
     },
