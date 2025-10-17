@@ -29,6 +29,7 @@ const Sidebar: React.FC = () => {
         { title: "Liste employés", path: "/employe" },
         //{ title: "Ajouter employé", path: "/employes/ajouter" },
         { title: "Statistiques", path: "/analyse" },
+         { title: "Manager", path: "/manager" },
       ],
     },
     {
