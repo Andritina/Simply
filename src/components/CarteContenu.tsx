@@ -17,10 +17,8 @@ const getClassesEtiquette = (titre: Contenu['titre']) => {
 }
 
 export const CarteContenu: React.FC<CarteContenuProps> = ({ contenu }) => {
-  const estEtiquetteSurImage = contenu.titre !== 'Public';
-
   return (
-    <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-lg group">
+    <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-lg group bg-gray-700">
       {/* Image de fond */}
       <img
         src={contenu.urlImage}
@@ -28,19 +26,15 @@ export const CarteContenu: React.FC<CarteContenuProps> = ({ contenu }) => {
         className="w-full h-full object-cover"
       />
 
-      {/* Voile sombre */}
-      <div className="absolute inset-0 bg-opacity-20 pointer-events-none"></div>
-
       {/* Étiquette de statut */}
       <div
-        className={`absolute text-sm  px-4 py-1 rounded-full ${getClassesEtiquette(contenu.titre)}
-          ${estEtiquetteSurImage ? 'top-18 right-12' : 'top-18 right-12'}`}
+        className={`absolute top-3 right-3 text-xs sm:text-sm px-3 py-1 rounded-full ${getClassesEtiquette(contenu.titre)}`}
       >
         {contenu.titre}
       </div>
 
       {/* Indicateur de prix */}
-      <div className="absolute bottom-3 right-1 text-white bg-gray-600 font-bold text-lg bg-opacity-50 px-2 rounded">
+      <div className="absolute bottom-3 right-3 text-white bg-gray-600 bg-opacity-70 font-bold text-sm sm:text-lg px-2 py-1 rounded">
         {contenu.prix}$
       </div>
     </div>
