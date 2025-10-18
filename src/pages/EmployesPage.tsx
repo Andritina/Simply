@@ -27,7 +27,7 @@ const EmployesPage: React.FC = () => {
         <Navbar />
 
         {/* Contenu */}
-        <div className="flex-1 overflow-y-auto p-6 bg-[#1D1E22]">
+        <div className="flex-1 overflow-y-auto p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold text-slate-100">
               Gestion des employés

@@ -10,6 +10,7 @@ import ProfilePage from './pages/ProfilePage'
 import ImageGallery from './components/ImageGallery'
 import FinancePage from './pages/FinancePage'
 import EmployesPage from './pages/EmployesPage'
+import ManagerPage from './pages/ManagerPage'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/image" element={<ImageGallery />} />
         <Route path="/finance" element={<FinancePage />} />
         <Route path="/employe" element={<EmployesPage />} />
+         <Route path="/manager" element={<ManagerPage />} />
       </Routes>
     </BrowserRouter>
   )

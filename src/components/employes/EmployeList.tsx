@@ -19,7 +19,7 @@ const EmployeList: React.FC<Props> = ({ employes, setEmployes }) => {
   };
 
   return (
-    <div className="bg-gray-800 border border-slate-800 rounded-2xl p-5 shadow-xl backdrop-blur-lg">
+    <div className="bg-gray-900 border border-slate-800 rounded-2xl p-5 shadow-xl backdrop-blur-lg">
       <table className="w-full text-left text-sm text-slate-300">
         <thead>
           <tr className="text-slate-400 border-b border-slate-700/50">
